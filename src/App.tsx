@@ -1,40 +1,14 @@
-import "./App.css";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
-
-import { useUserStore } from "./store";
+import Game from "./Game";
 
 function App() {
-	const user = useUserStore((state) => state.user);
-	const token = useUserStore((state) => state.token);
-	const setUser = useUserStore((state) => state.setUser);
-	const logout = useUserStore((state) => state.logout);
-
 	return (
 		<>
-			<Header />
-			<div>
-				{user ? (
-					<div>
-						<p>
-							User: {user.username} ({user.email})
-						</p>
-						<p>Token: {token}</p>
-						<button onClick={logout}>Logout</button>
-					</div>
-				) : (
-					<div>
-						<p>Please login.</p>
-						<button
-							onClick={() => {
-								const mockUser = { id: "1", email: "johndoe@mail.com", username: "John Doe" };
-								const mockToken = "token";
-								setUser(mockUser, mockToken);
-							}}
-						>
-							Login
-						</button>
-					</div>
-				)}
+			<div className="flex flex-col flex-1 h-full">
+				<Header />
+				<Game />
+				<Footer />
 			</div>
 		</>
 	);
