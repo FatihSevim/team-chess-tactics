@@ -1,4 +1,3 @@
-import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Game from "./Game";
 
@@ -8,7 +7,6 @@ function App() {
 			<div className="flex flex-col flex-1 h-full">
 				<Header />
 				<Game />
-				<Footer />
 			</div>
 		</>
 	);

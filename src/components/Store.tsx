@@ -1,4 +1,4 @@
-export default function Bench() {
+export default function Store() {
 	const champList = [
 		{ id: "1", name: "Champion A", gold: 3 },
 		{ id: "2", name: "Champion B", gold: 2 },

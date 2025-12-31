@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type Player = {
 	id: string;
 	username: string;
@@ -5,6 +7,9 @@ type Player = {
 };
 
 export default function Sidebar() {
+	const [showSidebar, setShowSidebar] = useState(false);
+	const [showPlayers, setShowPlayers] = useState(true);
+
 	const playerList = [
 		{ id: "1", username: "Player 1", health: 80 },
 		{ id: "2", username: "Player 2", health: 90 },
@@ -25,14 +30,46 @@ export default function Sidebar() {
 		);
 	};
 	return (
-		<div className="h-full w-64 bg-gray-200 border-l-2 p-3">
-			<div>
-				{playerList
-					.sort((a, b) => b.health - a.health)
-					.map((player) => (
-						<Player key={player.id} {...player} />
-					))}
+		<>
+			<div
+				className={
+					(showSidebar ? "absolute right-0 w-64" : "hidden") +
+					" h-full lg:w-64 lg:block bg-gray-200 border-l-2 p-3"
+				}
+			>
+				<div className={"flex justify-evenly" + (showSidebar ? " mt-8" : "")}>
+					<button
+						className={showPlayers ? "bg-blue-300 rounded-xl px-4 py-1" : ""}
+						onClick={() => setShowPlayers(true)}
+					>
+						players
+					</button>
+					<button
+						className={!showPlayers ? "bg-blue-300 rounded-xl px-4 py-1" : ""}
+						onClick={() => setShowPlayers(false)}
+					>
+						last match
+					</button>
+				</div>
+				{showPlayers ? (
+					<div>
+						{playerList
+							.sort((a, b) => b.health - a.health)
+							.map((player) => (
+								<Player key={player.id} {...player} />
+							))}
+					</div>
+				) : (
+					<div>
+						<span>last match details</span>
+					</div>
+				)}
 			</div>
-		</div>
+			<div className="lg:hidden absolute top-2 right-3">
+				<button onClick={() => setShowSidebar(!showSidebar)}>
+					{showSidebar ? "Hide Sidebar" : "Show Sidebar"}
+				</button>
+			</div>
+		</>
 	);
 }
